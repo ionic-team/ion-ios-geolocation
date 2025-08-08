@@ -17,7 +17,7 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
 
     @Published public var currentLocation: IONGLOCPositionModel?
     public var currentLocationPublisher: AnyPublisher<IONGLOCPositionModel, IONGLOCLocationError> {
-        $currentLocation
+        Publishers.Merge($currentLocation, currentLocationForceSubject)
             .dropFirst()    // ignore the first value as it's the one set on the constructor.
             .tryMap { location in
                 guard let location else { throw IONGLOCLocationError.locationUnavailable }
@@ -26,9 +26,13 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
             .mapError { $0 as? IONGLOCLocationError ?? .other($0) }
             .eraseToAnyPublisher()
     }
+    
+    private let currentLocationForceSubject = PassthroughSubject<IONGLOCPositionModel?, Never>()
 
     private let locationManager: CLLocationManager
     private let servicesChecker: IONGLOCServicesChecker
+    
+    private var isMonitoringLocation = false
 
     public init(locationManager: CLLocationManager = .init(), servicesChecker: IONGLOCServicesChecker = IONGLOCServicesValidator()) {
         self.locationManager = locationManager
@@ -44,14 +48,23 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
     }
 
     public func startMonitoringLocation() {
+        isMonitoringLocation = true
         locationManager.startUpdatingLocation()
     }
 
     public func stopMonitoringLocation() {
+        isMonitoringLocation = false
         locationManager.stopUpdatingLocation()
     }
-
+    
     public func requestSingleLocation() {
+        // If monitoring is active meaning the location service is already running
+        // and calling .requestLocation() will not trigger a new location update,
+        // we can just return the current location.
+        if isMonitoringLocation, let location = currentLocation {
+            currentLocationForceSubject.send(location)
+            return
+        }
         locationManager.requestLocation()
     }
 
