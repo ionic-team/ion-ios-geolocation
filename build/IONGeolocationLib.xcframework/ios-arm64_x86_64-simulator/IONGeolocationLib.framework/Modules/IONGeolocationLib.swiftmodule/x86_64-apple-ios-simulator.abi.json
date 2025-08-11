@@ -2637,6 +2637,27 @@
     },
     {
       "filePath": "\/Users\/runner\/work\/ion-ios-geolocation\/ion-ios-geolocation\/IONGeolocationLib\/Publishers\/IONGLOCManagerWrapper.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1499,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ion-ios-geolocation\/ion-ios-geolocation\/IONGeolocationLib\/Publishers\/IONGLOCManagerWrapper.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2133,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ion-ios-geolocation\/ion-ios-geolocation\/IONGeolocationLib\/Publishers\/IONGLOCManagerWrapper.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2267,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/runner\/work\/ion-ios-geolocation\/ion-ios-geolocation\/IONGeolocationLib\/Publishers\/IONGLOCManagerWrapper.swift",
       "kind": "StringLiteral",
       "offset": 403,
       "length": 21,
