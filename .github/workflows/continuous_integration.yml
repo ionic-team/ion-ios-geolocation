@@ -19,7 +19,7 @@ jobs:
         run: brew link --overwrite swiftlint || brew install swiftlint
 
       - name: Set up XCode 
-        run: sudo xcode-select --switch /Applications/Xcode_16.0.app
+        run: sudo xcode-select --switch /Applications/Xcode_15.0.app
       
       - name: Bundle Install
         run: bundle install
