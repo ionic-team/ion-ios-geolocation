@@ -6,51 +6,51 @@
 	<dict>
 		<key>Headers/IONGeolocationLib-Swift.h</key>
 		<data>
-		bXCzPKUGDYBxxonLxYnYnoDYK+E=
+		JWe6/NRDriu8o8CZocLZ06EzMFE=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		yHrkGN8bUEofSHDoM8wdjFu4t3Y=
+		KAtf5fTT/Qys6hx/g9yoVhsDLo4=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		rHaqSOCkZdbVVVsbCramvScZ85I=
+		F53+iT0LpZml+9QRjVuKfL5gBj4=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		QCwFgfpGKBR1j1DLXr+EWqKCY4s=
+		wIELuU+bviVDMXQsZpNuZ9IEZbU=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		QoiMk70xowUHd07D24ask1z2xQA=
+		o9JqKAGwlpjA8KPO8mibYxQvsfE=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		QCwFgfpGKBR1j1DLXr+EWqKCY4s=
+		wIELuU+bviVDMXQsZpNuZ9IEZbU=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		HymiWMHX9OmJmYIhOk2G3QjbfBQ=
+		8JCZa6+58YM3nw8Uk68J9Z2jbn8=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		rHaqSOCkZdbVVVsbCramvScZ85I=
+		F53+iT0LpZml+9QRjVuKfL5gBj4=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		vNvAWSvkQMv5i+077EqwumcMIes=
+		T8oVbSb37nZa9nv/4F7f1LDQzac=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		OjuXHke3/QFhwA3S4jvn8KUFzMU=
+		cSVSVRxq9lg8Af2eT1hcv6HYkKc=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		vNvAWSvkQMv5i+077EqwumcMIes=
+		T8oVbSb37nZa9nv/4F7f1LDQzac=
 		</data>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		A63TAKb8O+4e6wOVnmi0I7a28Tw=
+		S/OgzKqiyG8NNDQi2ME1CVJcPyw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -63,77 +63,77 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8xvzCzBx3G07IJzn5EjvuJHlu5W+JVJESFPF+Vng8JU=
+			OGEsrxX3RTGJsqeQoVnpaCV0WGpTMTY7dVIIi8xz9uk=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m1JkMv+t804hN11AyXEaC3A/GI7FJU8gsOiM/XEfLUA=
+			KsskI7EPccvcT2puYcQYPsucHMNjxp4tsZYteTUcn28=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			84+qrpGI2/mkBsZEF7EXycJ6pKaXNG83lAtVC56HcZw=
+			aM2ttY8+EXhIvt6rRD++w7pwh95bssB7fIDshfWCZ/E=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yANRF9Nsbhhp4xzwScBO/fPNoGGjGCAPGE+jjZwQRtU=
+			I4D3IMwrmHdZq980LPEONn9p8qvl4bCczXeMw//y8ds=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			84+qrpGI2/mkBsZEF7EXycJ6pKaXNG83lAtVC56HcZw=
+			aM2ttY8+EXhIvt6rRD++w7pwh95bssB7fIDshfWCZ/E=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			lfur7UC1rFq92wUorDPoyKowFT3NK747boaqbZ67jEw=
+			G4NhBRCo43KSHLG9eUSfcItV+aOdDbhhVU1yWk/GBgc=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m1JkMv+t804hN11AyXEaC3A/GI7FJU8gsOiM/XEfLUA=
+			KsskI7EPccvcT2puYcQYPsucHMNjxp4tsZYteTUcn28=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PlI1pFTqbsmhL/5pKNtiQAYMoP0OokkapokvBoAzpgs=
+			Fdf1vp8mRc5dcDVx7SJvvttw4g3tGD2z6dWvJ86mtrY=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			LwAbyZHcWHFwC9wkSmgT2xMjukWch/ye2Hu4GGlmfso=
+			GY5pmYaeQz84MMQHqQB9W+XQEu+T+Zhibz3+2SaVIgU=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PlI1pFTqbsmhL/5pKNtiQAYMoP0OokkapokvBoAzpgs=
+			Fdf1vp8mRc5dcDVx7SJvvttw4g3tGD2z6dWvJ86mtrY=
 			</data>
 		</dict>
 		<key>Modules/IONGeolocationLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			q0CWTtjfHQ99GbcoyWPv8QzK0bl7Q4f7tCfl7NENyh8=
+			8pXY/uF/mrzPOZ3jy5Mu+aGXt6LUs7B98JnwRY23xW8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -13,21 +13,23 @@ public protocol IONGLOCAuthorisationHandler {
 
 public enum IONGLOCLocationError: Error {
     case locationUnavailable
+    case timeout
     case other(_ error: Error)
 }
 
 public protocol IONGLOCLocationHandler {
     var currentLocation: IONGLOCPositionModel? { get }
     var currentLocationPublisher: AnyPublisher<IONGLOCPositionModel, IONGLOCLocationError> { get }
-
+    var locationTimeoutPublisher: AnyPublisher<IONGLOCLocationError, Never> { get }
     func updateConfiguration(_ configuration: IONGLOCConfigurationModel)
 }
 
 public protocol IONGLOCSingleLocationHandler: IONGLOCLocationHandler {
-    func requestSingleLocation()
+    func requestSingleLocation(timeout: Int?)
 }
 
 public protocol IONGLOCMonitorLocationHandler: IONGLOCLocationHandler {
+    func startMonitoringLocation(timeout: Int?)
     func startMonitoringLocation()
     func stopMonitoringLocation()
 }
