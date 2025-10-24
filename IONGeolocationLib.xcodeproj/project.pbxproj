@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DE511302EABBBFC0096C679 /* IONGLOCRequestOptionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE5112F2EABBBF70096C679 /* IONGLOCRequestOptionsModel.swift */; };
 		752B49212D11B262002EA65D /* IONGLOCManagerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B49202D11B262002EA65D /* IONGLOCManagerWrapper.swift */; };
 		752B49232D11D421002EA65D /* IONGLOCAuthorisationRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B49222D11D421002EA65D /* IONGLOCAuthorisationRequestType.swift */; };
 		752B49262D11D440002EA65D /* IONGLOCAuthorisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B49252D11D440002EA65D /* IONGLOCAuthorisation.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1DE5112F2EABBBF70096C679 /* IONGLOCRequestOptionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IONGLOCRequestOptionsModel.swift; sourceTree = "<group>"; };
 		752B49202D11B262002EA65D /* IONGLOCManagerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IONGLOCManagerWrapper.swift; sourceTree = "<group>"; };
 		752B49222D11D421002EA65D /* IONGLOCAuthorisationRequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IONGLOCAuthorisationRequestType.swift; sourceTree = "<group>"; };
 		752B49252D11D440002EA65D /* IONGLOCAuthorisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IONGLOCAuthorisation.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				752B49252D11D440002EA65D /* IONGLOCAuthorisation.swift */,
 				752B49222D11D421002EA65D /* IONGLOCAuthorisationRequestType.swift */,
 				752B49272D11D46D002EA65D /* IONGLOCPositionModel.swift */,
+				1DE5112F2EABBBF70096C679 /* IONGLOCRequestOptionsModel.swift */,
 			);
 			path = IONGeolocationLib;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DE511302EABBBFC0096C679 /* IONGLOCRequestOptionsModel.swift in Sources */,
 				752B49262D11D440002EA65D /* IONGLOCAuthorisation.swift in Sources */,
 				752B49282D11D46D002EA65D /* IONGLOCPositionModel.swift in Sources */,
 				752B49232D11D421002EA65D /* IONGLOCAuthorisationRequestType.swift in Sources */,
