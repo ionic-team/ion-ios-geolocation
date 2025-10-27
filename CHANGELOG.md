@@ -4,11 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## 2.0.0
+
+### Breaking Changes
+- The method `requestSingleLocation()` was replaced with `requestSingleLocation(options: IONGLOCRequestOptionsModel)`.
+This change allows adding new configuration parameters in the future without breaking changes.
+
+### Additions
+- Added `IONGLOCRequestOptionsModel` to configure timeout (and future parameters).
+- Added overload `startMonitoringLocation(options: IONGLOCRequestOptionsModel)`.
 
 ### Fixes
-
-- Add timeout for both `requestSingleLocation`and `startMonitoringLocation`
+- Introduced timeout handling for both `requestSingleLocation` and `startMonitoringLocation`.
 
 ## 1.0.2
 
