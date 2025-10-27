@@ -131,7 +131,7 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
         XCTAssertFalse(locationManager.didCallRequestLocation)
 
         // When
-        sut.requestSingleLocation()
+        sut.requestSingleLocation(options: IONGLOCRequestOptionsModel())
 
         // Then
         XCTAssertTrue(locationManager.didCallRequestLocation)
