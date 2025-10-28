@@ -123,6 +123,20 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
         // Then
         XCTAssertFalse(locationManager.didStartUpdatingLocation)
     }
+    
+    func test_startMonitoringLocation_timeoutFires() {
+        // Given
+        let expectation = self.expectation(description: "Timeout should fire for monitoring location")
+        
+        // When
+        let options = IONGLOCRequestOptionsModel(timeout: 1)
+        sut.startMonitoringLocation(options: options)
+        
+        // Then
+        validateLocationTimeoutPublisher(expectation)
+        
+        waitForExpectations(timeout: 1.0)
+    }
 
     // MARK: - 'requestSingleLocation' tests
 
@@ -135,6 +149,20 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
 
         // Then
         XCTAssertTrue(locationManager.didCallRequestLocation)
+    }
+    
+    func test_requestSingleLocation_timeoutFires() {
+        // Given
+        let expectation = self.expectation(description: "Timeout should fire for single location request")
+        
+        // When
+        let options = IONGLOCRequestOptionsModel(timeout: 1)
+        sut.requestSingleLocation(options: options)
+        
+        // Then
+        validateLocationTimeoutPublisher(expectation)
+        
+        waitForExpectations(timeout: 1.0)
     }
 
     // MARK: - 'updateConfiguration' tests
@@ -307,6 +335,20 @@ private extension IONGLOCManagerWrapperTests {
             .dropFirst()    // ignore the first value as it's the one set on the constructor.
             .sink { status in
                 XCTAssertEqual(status, expectedStatus)
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+    }
+    
+    func validateLocationTimeoutPublisher(_ expectation: XCTestExpectation) {
+        sut.locationTimeoutPublisher
+            .sink { error in
+                switch error {
+                case .timeout:
+                    break
+                default:
+                    XCTFail("Expected timeout error, got \(error)")
+                }
                 expectation.fulfill()
             }
             .store(in: &cancellables)
