@@ -345,11 +345,11 @@ private extension IONGLOCManagerWrapperTests {
             .sink { error in
                 switch error {
                 case .timeout:
+                    expectation.fulfill()
                     break
                 default:
                     XCTFail("Expected timeout error, got \(error)")
                 }
-                expectation.fulfill()
             }
             .store(in: &cancellables)
     }
