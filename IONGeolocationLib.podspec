@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                   = 'IONGeolocationLib'
-  spec.version                = '1.0.2'
+  spec.version                = '2.0.0'
 
   spec.summary                = 'A native iOS library for Geolocation authorisation and monitoring.'
   spec.description            = 'A Swift library for iOS that provides simple, reliable access to device GPS capabilities. Get location data, monitor position changes, and manage location services with a clean, modern API.'
