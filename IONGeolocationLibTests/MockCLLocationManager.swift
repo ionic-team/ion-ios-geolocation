@@ -5,10 +5,21 @@ class MockCLLocationManager: CLLocationManager {
     private(set) var didCallRequestLocation = false
     private(set) var didCallRequestWhenInUseAuthorization = false
     private(set) var didStartUpdatingLocation = false
+    private(set) var didStartUpdatingHeading = false
     private(set) var mockAuthorizationStatus: CLAuthorizationStatus = .notDetermined
+    private(set) var mockHeadingFilter: CLLocationDegrees = kCLHeadingFilterNone
 
     override var authorizationStatus: CLAuthorizationStatus {
         mockAuthorizationStatus
+    }
+
+    override var headingFilter: CLLocationDegrees {
+        get {
+            mockHeadingFilter
+        }
+        set {
+            mockHeadingFilter = newValue
+        }
     }
 
     override func startUpdatingLocation() {
@@ -17,6 +28,14 @@ class MockCLLocationManager: CLLocationManager {
 
     override func stopUpdatingLocation() {
         didStartUpdatingLocation = false
+    }
+
+    override func startUpdatingHeading() {
+        didStartUpdatingHeading = true
+    }
+
+    override func stopUpdatingHeading() {
+        didStartUpdatingHeading = false
     }
 
     override func requestLocation() {
@@ -38,6 +57,10 @@ class MockCLLocationManager: CLLocationManager {
 
     func updateLocation(to locations: [CLLocation]) {
         delegate?.locationManager?(self, didUpdateLocations: locations)
+    }
+
+    func updateHeading(to heading: CLHeading) {
+        delegate?.locationManager?(self, didUpdateHeading: heading)
     }
 
     func failWhileUpdatingLocation(_ error: Error) {
