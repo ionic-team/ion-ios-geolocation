@@ -39,6 +39,8 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
     private let servicesChecker: IONGLOCServicesChecker
     
     private var isMonitoringLocation = false
+    private var lastLocation: CLLocation?
+    private var lastHeading: CLHeading?
 
     // Flag used to indicate that the location request has timed out.
     // When `true`, the wrapper ignores any location updates received from CLLocationManager.
@@ -61,7 +63,9 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
     public func startMonitoringLocation(options: IONGLOCRequestOptionsModel) {
         timeoutTriggered = false
         isMonitoringLocation = true
+        locationManager.headingFilter = 1.0
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
         self.startTimer(timeout: options.timeout)
     }
     
@@ -71,12 +75,15 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
         }
         
         isMonitoringLocation = true
+        locationManager.headingFilter = 1.0
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
 
     public func stopMonitoringLocation() {
         isMonitoringLocation = false
         locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingHeading()
     }
     
     public func requestSingleLocation(options: IONGLOCRequestOptionsModel) {
@@ -137,16 +144,30 @@ extension IONGLOCManagerWrapper: CLLocationManagerDelegate {
      
         timeoutCancellable?.cancel()
         timeoutCancellable = nil
-        guard let latestLocation = locations.last else {
+        guard let lastLocation = locations.last else {
             currentLocation = nil
+            self.lastLocation = nil
+            lastHeading = nil
             return
         }
-        currentLocation = IONGLOCPositionModel.create(from: latestLocation)
+        self.lastLocation = lastLocation
+        currentLocation = IONGLOCPositionModel.create(from: lastLocation, heading: lastHeading)
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
         timeoutCancellable?.cancel()
         timeoutCancellable = nil
         currentLocation = nil
+        lastLocation = nil
+        lastHeading = nil
+    }
+    
+    public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        guard let lastLocation = self.lastLocation else {
+            return
+        }
+        
+        lastHeading = newHeading
+        currentLocation = IONGLOCPositionModel.create(from: lastLocation, heading: lastHeading)
     }
 }

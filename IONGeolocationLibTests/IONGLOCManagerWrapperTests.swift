@@ -314,6 +314,158 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
         // Then
         waitForExpectations(timeout: 1.0)
     }
+
+    // MARK: - Heading Tests
+
+    func test_startMonitoringLocation_startsUpdatingHeading() {
+        // Given
+        XCTAssertFalse(locationManager.didStartUpdatingHeading)
+
+        // When
+        sut.startMonitoringLocation()
+
+        // Then
+        XCTAssertTrue(locationManager.didStartUpdatingHeading)
+    }
+
+    func test_startMonitoringLocationWithOptions_startsUpdatingHeading() {
+        // Given
+        XCTAssertFalse(locationManager.didStartUpdatingHeading)
+
+        // When
+        let options = IONGLOCRequestOptionsModel(timeout: 1000)
+        sut.startMonitoringLocation(options: options)
+
+        // Then
+        XCTAssertTrue(locationManager.didStartUpdatingHeading)
+    }
+
+    func test_stopMonitoringLocation_stopsUpdatingHeading() {
+        // Given
+        sut.startMonitoringLocation()
+        XCTAssertTrue(locationManager.didStartUpdatingHeading)
+
+        // When
+        sut.stopMonitoringLocation()
+
+        // Then
+        XCTAssertFalse(locationManager.didStartUpdatingHeading)
+    }
+
+    func test_locationUpdateWithHeading_includesHeadingInPositionModel() {
+        // Given
+        let expectedLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        let expectedHeading = createMockHeading(magneticHeading: 90.0, trueHeading: 92.0)
+        let expectedPosition = IONGLOCPositionModel.create(from: expectedLocation, heading: expectedHeading)
+        let expectation = expectation(description: "Location with heading updated.")
+
+        sut.currentLocationPublisher
+            .dropFirst()
+            .sink(receiveCompletion: { _ in }, receiveValue: { position in
+                if position.magneticHeading == expectedPosition.magneticHeading && position.trueHeading == expectedPosition.trueHeading {
+                    XCTAssertEqual(position, expectedPosition)
+                    expectation.fulfill()
+                }
+            })
+            .store(in: &cancellables)
+
+        // When
+        locationManager.updateLocation(to: [expectedLocation])
+        locationManager.updateHeading(to: expectedHeading)
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func test_headingUpdateWithoutLocation_doesNotUpdatePositionModel() {
+        // Given
+        let heading = createMockHeading(magneticHeading: 180.0, trueHeading: 182.0)
+        var updateCount = 0
+        let expectation = expectation(description: "No update should occur.")
+        expectation.isInverted = true
+
+        sut.currentLocationPublisher
+            .sink(receiveCompletion: { _ in }, receiveValue: { _ in
+                updateCount += 1
+                expectation.fulfill()
+            })
+            .store(in: &cancellables)
+
+        // When
+        locationManager.updateHeading(to: heading)
+
+        // Then
+        waitForExpectations(timeout: 0.5)
+        XCTAssertEqual(updateCount, 0)
+    }
+
+    func test_headingUpdateAfterLocationUpdate_updatesPositionModelWithNewHeading() {
+        // Given
+        let location = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        let firstHeading = createMockHeading(magneticHeading: 90.0, trueHeading: 92.0)
+        let secondHeading = createMockHeading(magneticHeading: 180.0, trueHeading: 182.0)
+        let expectedPosition = IONGLOCPositionModel.create(from: location, heading: secondHeading)
+        let expectation = expectation(description: "Position updated with new heading.")
+
+        locationManager.updateLocation(to: [location])
+        locationManager.updateHeading(to: firstHeading)
+
+        validateCurrentLocationPublisher(expectation, expectedPosition)
+
+        // When
+        locationManager.updateHeading(to: secondHeading)
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func test_locationUpdatePreservesExistingHeading() {
+        // Given
+        let firstLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        let secondLocation = CLLocation(latitude: 48.8859, longitude: -111.3083)
+        let heading = createMockHeading(magneticHeading: 270.0, trueHeading: 272.0)
+        let expectedPosition = IONGLOCPositionModel.create(from: secondLocation, heading: heading)
+        let expectation = expectation(description: "Location updated with preserved heading.")
+
+        locationManager.updateLocation(to: [firstLocation])
+        locationManager.updateHeading(to: heading)
+
+        validateCurrentLocationPublisher(expectation, expectedPosition)
+
+        // When
+        locationManager.updateLocation(to: [secondLocation])
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func test_headingFilterIsSetToOneDegree() {
+        // Given
+        XCTAssertEqual(locationManager.headingFilter, kCLHeadingFilterNone)
+
+        // When
+        sut.startMonitoringLocation()
+
+        // Then
+        XCTAssertEqual(locationManager.headingFilter, 1.0)
+    }
+
+    func test_positionModelWithoutHeading_hasDefaultHeadingValues() {
+        // Given
+        let location = CLLocation(latitude: 37.7749, longitude: -122.4194)
+        let expectedPosition = IONGLOCPositionModel.create(from: location)
+        let expectation = expectation(description: "Location without heading updated.")
+
+        validateCurrentLocationPublisher(expectation, expectedPosition)
+
+        // When
+        locationManager.updateLocation(to: [location])
+
+        // Then
+        waitForExpectations(timeout: 1.0)
+        XCTAssertEqual(expectedPosition.magneticHeading, -1.0)
+        XCTAssertEqual(expectedPosition.trueHeading, -1.0)
+    }
 }
 
 private extension IONGLOCManagerWrapperTests {
@@ -353,6 +505,13 @@ private extension IONGLOCManagerWrapperTests {
             }
             .store(in: &cancellables)
     }
+
+    func createMockHeading(magneticHeading: Double, trueHeading: Double) -> CLHeading {
+        let heading = MockCLHeading()
+        heading.mockMagneticHeading = magneticHeading
+        heading.mockTrueHeading = trueHeading
+        return heading
+    }
 }
 
 private extension CLLocationManager {
@@ -362,4 +521,17 @@ private extension CLLocationManager {
 
 private enum MockLocationUpdateError: Error {
     case locationUpdateFailed
+}
+
+private class MockCLHeading: CLHeading {
+    var mockMagneticHeading: Double = 0.0
+    var mockTrueHeading: Double = 0.0
+
+    override var magneticHeading: Double {
+        mockMagneticHeading
+    }
+
+    override var trueHeading: Double {
+        mockTrueHeading
+    }
 }

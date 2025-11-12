@@ -9,8 +9,10 @@ public struct IONGLOCPositionModel: Equatable {
     private(set) public var speed: Double
     private(set) public var timestamp: Double
     private(set) public var verticalAccuracy: Double
+    private(set) public var magneticHeading: Double
+    private(set) public var trueHeading: Double
 
-    private init(altitude: Double, course: Double, horizontalAccuracy: Double, latitude: Double, longitude: Double, speed: Double, timestamp: Double, verticalAccuracy: Double) {
+    private init(altitude: Double, course: Double, horizontalAccuracy: Double, latitude: Double, longitude: Double, speed: Double, timestamp: Double, verticalAccuracy: Double, magneticHeading: Double, trueHeading: Double) {
         self.altitude = altitude
         self.course = course
         self.horizontalAccuracy = horizontalAccuracy
@@ -19,12 +21,14 @@ public struct IONGLOCPositionModel: Equatable {
         self.speed = speed
         self.timestamp = timestamp
         self.verticalAccuracy = verticalAccuracy
+        self.magneticHeading = magneticHeading
+        self.trueHeading = trueHeading
     }
 }
 
 public extension IONGLOCPositionModel {
-    static func create(from location: CLLocation) -> IONGLOCPositionModel {
-        .init(
+    static func create(from location: CLLocation, heading: CLHeading? = nil) -> IONGLOCPositionModel {
+        return .init(
             altitude: location.altitude,
             course: location.course,
             horizontalAccuracy: location.horizontalAccuracy,
@@ -32,7 +36,9 @@ public extension IONGLOCPositionModel {
             longitude: location.coordinate.longitude,
             speed: location.speed,
             timestamp: location.timestamp.millisecondsSinceUnixEpoch,
-            verticalAccuracy: location.verticalAccuracy
+            verticalAccuracy: location.verticalAccuracy,
+            magneticHeading: heading?.magneticHeading ?? -1.0,
+            trueHeading: heading?.trueHeading ?? -1.0
         )
     }
 }
