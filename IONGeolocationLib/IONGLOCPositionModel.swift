@@ -11,8 +11,9 @@ public struct IONGLOCPositionModel: Equatable {
     private(set) public var verticalAccuracy: Double
     private(set) public var magneticHeading: Double
     private(set) public var trueHeading: Double
+    private(set) public var headingAccuracy: Double
 
-    private init(altitude: Double, course: Double, horizontalAccuracy: Double, latitude: Double, longitude: Double, speed: Double, timestamp: Double, verticalAccuracy: Double, magneticHeading: Double, trueHeading: Double) {
+    private init(altitude: Double, course: Double, horizontalAccuracy: Double, latitude: Double, longitude: Double, speed: Double, timestamp: Double, verticalAccuracy: Double, magneticHeading: Double, trueHeading: Double, headingAccuracy: Double) {
         self.altitude = altitude
         self.course = course
         self.horizontalAccuracy = horizontalAccuracy
@@ -23,6 +24,7 @@ public struct IONGLOCPositionModel: Equatable {
         self.verticalAccuracy = verticalAccuracy
         self.magneticHeading = magneticHeading
         self.trueHeading = trueHeading
+        self.headingAccuracy = headingAccuracy
     }
 }
 
@@ -38,7 +40,8 @@ public extension IONGLOCPositionModel {
             timestamp: location.timestamp.millisecondsSinceUnixEpoch,
             verticalAccuracy: location.verticalAccuracy,
             magneticHeading: heading?.magneticHeading ?? -1.0,
-            trueHeading: heading?.trueHeading ?? -1.0
+            trueHeading: heading?.trueHeading ?? -1.0,
+            headingAccuracy: heading?.headingAccuracy ?? -1.0
         )
     }
 }
