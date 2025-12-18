@@ -3,7 +3,7 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - main, development
+      - main, development, test/macos-15
   pull_request:
     types: [opened, synchronize, reopened]
 
