@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Additions
 - Added `magneticHeading`, `trueHeading`, and `headingAccuracy` to `IONGLOCPositionModel`.
-- Added support for compass heading in both `requestSingleLocation` and monitoring flows using `CLHeading`.
+- Added support for compass heading in location monitoring flows using `CLHeading`.
 
 ## 2.0.0
 

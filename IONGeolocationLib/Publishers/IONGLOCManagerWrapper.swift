@@ -96,8 +96,6 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
             return
         }
         
-        locationManager.headingFilter = 1.0
-        locationManager.startUpdatingHeading()
         self.locationManager.requestLocation()
         self.startTimer(timeout: options.timeout)
     }
@@ -152,9 +150,6 @@ extension IONGLOCManagerWrapper: CLLocationManagerDelegate {
             lastHeading = nil
             return
         }
-        if !isMonitoringLocation {
-            locationManager.stopUpdatingHeading()
-        }
         
         self.lastLocation = lastLocation
         currentLocation = IONGLOCPositionModel.create(from: lastLocation, heading: lastHeading)
@@ -163,10 +158,6 @@ extension IONGLOCManagerWrapper: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
         timeoutCancellable?.cancel()
         timeoutCancellable = nil
-        
-        if !isMonitoringLocation {
-            locationManager.stopUpdatingHeading()
-        }
         
         currentLocation = nil
         lastLocation = nil
