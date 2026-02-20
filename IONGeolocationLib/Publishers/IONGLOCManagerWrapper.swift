@@ -54,6 +54,7 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
 
         super.init()
         locationManager.delegate = self
+        locationManager.headingFilter = 1.0
     }
 
     public func requestAuthorisation(withType authorisationType: IONGLOCAuthorisationRequestType) {
@@ -63,7 +64,6 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
     public func startMonitoringLocation(options: IONGLOCRequestOptionsModel) {
         timeoutTriggered = false
         isMonitoringLocation = true
-        locationManager.headingFilter = 1.0
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
         self.startTimer(timeout: options.timeout)
@@ -75,7 +75,6 @@ public class IONGLOCManagerWrapper: NSObject, IONGLOCService {
         }
         
         isMonitoringLocation = true
-        locationManager.headingFilter = 1.0
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
     }
@@ -152,7 +151,8 @@ extension IONGLOCManagerWrapper: CLLocationManagerDelegate {
         }
         
         self.lastLocation = lastLocation
-        currentLocation = IONGLOCPositionModel.create(from: lastLocation, heading: lastHeading)
+        let currentHeading = isMonitoringLocation ? lastHeading : nil
+        currentLocation = IONGLOCPositionModel.create(from: lastLocation, heading: currentHeading)
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
