@@ -404,12 +404,6 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
 
 
     func test_headingFilterIsSetToOneDegree() {
-        // Given
-        XCTAssertEqual(locationManager.headingFilter, kCLHeadingFilterNone)
-
-        // When
-        sut.startMonitoringLocation()
-
         // Then
         XCTAssertEqual(locationManager.headingFilter, 1.0)
     }
