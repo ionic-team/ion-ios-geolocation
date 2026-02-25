@@ -354,13 +354,14 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
 
     func test_locationUpdateWithHeading_includesHeadingInPositionModel() {
         // Given
+        sut.startMonitoringLocation()
+
         let expectedLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
         let expectedHeading = createMockHeading(magneticHeading: 90.0, trueHeading: 92.0, headingAccuracy: 1.0)
         let expectedPosition = IONGLOCPositionModel.create(from: expectedLocation, heading: expectedHeading)
         let expectation = expectation(description: "Location with heading updated.")
 
         sut.currentLocationPublisher
-            .dropFirst()
             .sink(receiveCompletion: { _ in }, receiveValue: { position in
                 if position.magneticHeading == expectedPosition.magneticHeading && position.trueHeading == expectedPosition.trueHeading {
                     XCTAssertEqual(position, expectedPosition)
@@ -370,8 +371,9 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
             .store(in: &cancellables)
 
         // When
-        locationManager.updateLocation(to: [expectedLocation])
+        locationManager.updateLocation(to: [CLLocation(latitude: 0, longitude: 0)])
         locationManager.updateHeading(to: expectedHeading)
+        locationManager.updateLocation(to: [expectedLocation])
 
         // Then
         waitForExpectations(timeout: 1.0)
@@ -399,45 +401,7 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
         XCTAssertEqual(updateCount, 0)
     }
 
-    func test_headingUpdateAfterLocationUpdate_updatesPositionModelWithNewHeading() {
-        // Given
-        let location = CLLocation(latitude: 37.7749, longitude: -122.4194)
-        let firstHeading = createMockHeading(magneticHeading: 90.0, trueHeading: 92.0, headingAccuracy: 1.0)
-        let secondHeading = createMockHeading(magneticHeading: 180.0, trueHeading: 182.0, headingAccuracy: 1.0)
-        let expectedPosition = IONGLOCPositionModel.create(from: location, heading: secondHeading)
-        let expectation = expectation(description: "Position updated with new heading.")
 
-        locationManager.updateLocation(to: [location])
-        locationManager.updateHeading(to: firstHeading)
-
-        validateCurrentLocationPublisher(expectation, expectedPosition)
-
-        // When
-        locationManager.updateHeading(to: secondHeading)
-
-        // Then
-        waitForExpectations(timeout: 1.0)
-    }
-
-    func test_locationUpdatePreservesExistingHeading() {
-        // Given
-        let firstLocation = CLLocation(latitude: 37.7749, longitude: -122.4194)
-        let secondLocation = CLLocation(latitude: 48.8859, longitude: -111.3083)
-        let heading = createMockHeading(magneticHeading: 270.0, trueHeading: 272.0, headingAccuracy: 1.0)
-        let expectedPosition = IONGLOCPositionModel.create(from: secondLocation, heading: heading)
-        let expectation = expectation(description: "Location updated with preserved heading.")
-
-        locationManager.updateLocation(to: [firstLocation])
-        locationManager.updateHeading(to: heading)
-
-        validateCurrentLocationPublisher(expectation, expectedPosition)
-
-        // When
-        locationManager.updateLocation(to: [secondLocation])
-
-        // Then
-        waitForExpectations(timeout: 1.0)
-    }
 
     func test_headingFilterIsSetToOneDegree() {
         // Given
@@ -463,9 +427,9 @@ final class IONGLOCManagerWrapperTests: XCTestCase {
 
         // Then
         waitForExpectations(timeout: 1.0)
-        XCTAssertEqual(expectedPosition.magneticHeading, -1.0)
-        XCTAssertEqual(expectedPosition.trueHeading, -1.0)
-        XCTAssertEqual(expectedPosition.headingAccuracy, -1.0)
+        XCTAssertNil(expectedPosition.magneticHeading)
+        XCTAssertNil(expectedPosition.trueHeading)
+        XCTAssertNil(expectedPosition.headingAccuracy)
     }
 }
 

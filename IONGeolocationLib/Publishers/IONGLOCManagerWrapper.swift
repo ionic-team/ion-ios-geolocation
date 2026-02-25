@@ -165,11 +165,7 @@ extension IONGLOCManagerWrapper: CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        guard let lastLocation = self.lastLocation else {
-            return
-        }
-        
+        guard self.lastLocation != nil else { return }
         lastHeading = newHeading
-        currentLocation = IONGLOCPositionModel.create(from: lastLocation, heading: lastHeading)
     }
 }
