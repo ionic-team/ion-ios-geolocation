@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/ionic-team/ion-ios-geolocation/compare/2.0.0...2.1.0) (2026-03-05)
+
+
+### Features
+
+* add support for heading  ([a1d9bb7](https://github.com/ionic-team/ion-ios-geolocation/commit/a1d9bb7afd490b401e8f521722d4c41cc2531249))
+
 ## 2.0.0
 
 ### Breaking Changes
