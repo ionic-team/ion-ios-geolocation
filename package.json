@@ -1,6 +1,6 @@
 {
   "name": "IONGeolocationLib",
-  "version": "2.1.1",
+  "version": "2.1.0",
   "description": "A native iOS library for Geolocation authorisation and monitoring.",
   "author": "OutSystems Mobile Ecosystem",
   "email": "rd.mobileecosystem.team@outsystems.com",

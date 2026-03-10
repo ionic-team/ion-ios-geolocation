@@ -1,10 +1,3 @@
-## [2.1.1](https://github.com/ionic-team/ion-ios-geolocation/compare/2.1.0...2.1.1) (2026-03-10)
-
-
-### Bug Fixes
-
-* use Xcode 16 instead of 26 ([#19](https://github.com/ionic-team/ion-ios-geolocation/issues/19)) ([7d8362e](https://github.com/ionic-team/ion-ios-geolocation/commit/7d8362e37a80f4904d1568a6739fa035db42acfc))
-
 # [2.1.0](https://github.com/ionic-team/ion-ios-geolocation/compare/2.0.0...2.1.0) (2026-03-05)
 
 
