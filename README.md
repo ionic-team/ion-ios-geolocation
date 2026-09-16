@@ -8,7 +8,7 @@ A Swift library for iOS that provides simple, reliable access to device GPS capa
 
 ## Requirements
 
-- iOS 14.0+
+- iOS 15.0+
 - Swift 5.0+
 - Xcode 15.0+
 
