@@ -14,12 +14,24 @@ A Swift library for iOS that provides simple, reliable access to device GPS capa
 
 ## Installation
 
+> Replace `${version to use}` below with the version you want to use. Check the [Releases page](https://github.com/ionic-team/OSGeolocationLib-iOS/releases) for available versions.
+
+### Swift Package Manager
+
+Add the following to your `Package.swift` file:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/ionic-team/OSGeolocationLib-iOS.git", from: "${version to use}")
+]
+```
+
 ### CocoaPods
 
 `ion-ios-geolocation` is available through [CocoaPods](https://cocoapods.org). Add this to your Podfile:
 
 ```ruby
-pod 'IONGeolocationLib', '~> 3.0.0'
+pod 'IONGeolocationLib', '~> ${version to use}'
 ```
 
 ## Quick Start
